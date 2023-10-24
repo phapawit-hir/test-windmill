@@ -1,0 +1,10 @@
+description: Workshop DB
+value:
+  dbname: postgres
+  host: db.eximpnyflujstfaldact.supabase.co
+  password: '$var:u/it/postgresql_supabase_workshopdb'
+  port: 5432
+  root_certificate_pem: ''
+  sslmode: disable
+  user: postgres
+resource_type: postgresql

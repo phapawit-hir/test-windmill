@@ -1,0 +1,53 @@
+summary: ''
+description: ''
+value:
+  modules:
+    - id: a
+      value:
+        type: script
+        input_transforms:
+          database:
+            type: static
+            value: '$res:u/it/postgresql_supabase_workshopdb'
+        path: u/it/get_sum
+    - id: b
+      summary: Send a message to discord using webhook (discord)
+      value:
+        type: rawscript
+        content: >-
+          !inline
+          send_a_message_to_discord_using_webhook_(discord).inline_script.ts
+        input_transforms:
+          discord_webhook:
+            type: javascript
+            expr: flow_input.discord_webhook
+          message:
+            type: javascript
+            expr: 'results.a[0].sum'
+        lock: |
+          {
+            "version": "2",
+            "remote": {
+              "https://deno.land/x/discordwebhook@v1.5.1/index.ts": "1efa12d5cbac8cfb75649ca12358df92a6ec46b308d1c3d80bd522f11cfe0765",
+              "https://deno.land/x/discordwebhook@v1.5.1/interfaces/editParams.ts": "66b77d8f4126fea43bde4bf237d89457efe95c458603cf49eb1de371ebf9af37",
+              "https://deno.land/x/discordwebhook@v1.5.1/interfaces/embedStructure.ts": "898f69aa910b1f8df51c564bd4fbf23157d860f0ea3ab58273db37d46bc89b9f",
+              "https://deno.land/x/discordwebhook@v1.5.1/interfaces/executeParams.ts": "d6033d6359b5736175c56498a8dd8dec674ad0ad5739fe1feda984072e3642f7",
+              "https://deno.land/x/discordwebhook@v1.5.1/mod.ts": "81632cdb793d9ef9ff2f6b284e0ad8641e4661b0d19590bf05c96d16e8cf7f98"
+            }
+          }
+        language: deno
+schema:
+  $schema: 'https://json-schema.org/draft/2020-12/schema'
+  type: object
+  order:
+    - discord_webhook
+  properties:
+    discord_webhook:
+      type: object
+      description: ''
+      default: null
+      format: resource-discord_webhook
+  required:
+    - discord_webhook
+tag: null
+ws_error_handler_muted: false
