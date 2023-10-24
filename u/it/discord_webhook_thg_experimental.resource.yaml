@@ -1,4 +1,0 @@
-description: ''
-value:
-  webhook_url: '$var:u/it/discord_webhook_thg_experimental'
-resource_type: discord_webhook
